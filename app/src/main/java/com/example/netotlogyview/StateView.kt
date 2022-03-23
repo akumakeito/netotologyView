@@ -31,6 +31,10 @@ class StateView @JvmOverloads constructor(
     private var lineWidth = AndroidUtils.dp(context, 15F).toFloat()
     private var fontSize = AndroidUtils.dp(context, 40F).toFloat()
     private var colors = emptyList<Int>()
+    private val partsCount = 4F
+    private var sumOfElement = 0F
+    private var hundredPercentSum = 0F
+
 
     init {
         context.withStyledAttributes(attrs, R.styleable.StateView) {
@@ -73,10 +77,12 @@ class StateView @JvmOverloads constructor(
         if (data.isEmpty()) {
             return
         }
+        hundredPercentSum = data[0] * partsCount
+        sumOfElement = data.sum()
 
         var startFrom = -90F
         for ((index, datum) in data.withIndex()) {
-            val angle = 360F * datum
+            val angle = 360F * getPercent(hundredPercentSum, datum)/100
             strokePaint.color = colors.getOrNull(index) ?: getRandomColor()
             canvas.drawArc(oval, startFrom, angle, false, strokePaint)
             startFrom += angle
@@ -85,7 +91,7 @@ class StateView @JvmOverloads constructor(
 
 
         canvas.drawText(
-            "%.2f%%".format(data.sum() * 100),
+            "%.2f%%".format(getPercent(hundredPercentSum, sumOfElement)),
             center.x,
             center.y + textPaint.textSize / 4F,
             textPaint
@@ -93,4 +99,6 @@ class StateView @JvmOverloads constructor(
     }
 
     private fun getRandomColor() = Random.nextInt(0xFF000000.toInt(), 0xFFFFFFFF.toInt())
+    private fun getPercent(sumOfElement : Float, element: Float): Float = element * 100 / sumOfElement
+
 }
