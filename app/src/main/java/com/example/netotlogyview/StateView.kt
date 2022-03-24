@@ -64,6 +64,7 @@ class StateView @JvmOverloads constructor(
         textSize = fontSize
     }
 
+
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         radius = min(w,h) / 2F - lineWidth / 2
         center = PointF(w / 2F, h / 2F)
@@ -86,8 +87,10 @@ class StateView @JvmOverloads constructor(
             strokePaint.color = colors.getOrNull(index) ?: getRandomColor()
             canvas.drawArc(oval, startFrom, angle, false, strokePaint)
             startFrom += angle
-
         }
+
+
+
 
 
         canvas.drawText(
@@ -96,6 +99,10 @@ class StateView @JvmOverloads constructor(
             center.y + textPaint.textSize / 4F,
             textPaint
         )
+
+        strokePaint.color = colors[0]
+
+        canvas.drawPoint(center.x, center.y - radius, strokePaint)
     }
 
     private fun getRandomColor() = Random.nextInt(0xFF000000.toInt(), 0xFFFFFFFF.toInt())
