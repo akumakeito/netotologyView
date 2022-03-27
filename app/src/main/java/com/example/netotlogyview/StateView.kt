@@ -100,17 +100,18 @@ class StateView @JvmOverloads constructor(
         sumOfElement = data.sum()
 
         var startAngle = -90F
+        val rotationAngle = progress * 360
 
 
         for ((index, datum) in data.withIndex()) {
             val angle = 360F * getPercent(hundredPercentSum, datum)/100
             strokePaint.color = colors.getOrNull(index) ?: getRandomColor()
-            canvas.drawArc(oval, startAngle + (progress * 360), angle * progress, false, strokePaint)
+            canvas.drawArc(oval, startAngle + rotationAngle, angle * progress, false, strokePaint)
             startAngle += angle
         }
         strokePaint.color = colors[0]
 
-            canvas.drawArc(oval, -90F + (progress *360), 1F, false, strokePaint)
+            canvas.drawArc(oval, -90F + rotationAngle, 1F, false, strokePaint)
     }
 
     private fun getRandomColor() = Random.nextInt(0xFF000000.toInt(), 0xFFFFFFFF.toInt())
@@ -131,6 +132,7 @@ class StateView @JvmOverloads constructor(
                 progress = anim.animatedValue as Float
                 invalidate()
             }
+            startDelay = 500
             duration = 3_000
             interpolator = LinearInterpolator()
         }.also {
