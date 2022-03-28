@@ -104,7 +104,8 @@ class StateView @JvmOverloads constructor(
 
 
         for ((index, datum) in data.withIndex()) {
-            val angle = 360F * getPercent(hundredPercentSum, datum)/100
+            val percent = getPercent(hundredPercentSum, datum)/100
+            val angle = 360F * percent
             strokePaint.color = colors.getOrNull(index) ?: getRandomColor()
             canvas.drawArc(oval, startAngle + rotationAngle, angle * progress, false, strokePaint)
             startAngle += angle
