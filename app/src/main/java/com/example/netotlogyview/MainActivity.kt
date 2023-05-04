@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.view.animation.LinearInterpolator
-import java.util.*
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,17 +20,17 @@ class MainActivity : AppCompatActivity() {
                 500F,
         )
 
-//        ObjectAnimator.ofFloat(view, View.ROTATION, 360F).apply {
-//            duration = 3000
-//            interpolator = LinearInterpolator()
-//        }.start()
-//
+        ObjectAnimator.ofFloat(view, View.ROTATION, 360F).apply {
+            duration = 3000
+            interpolator = LinearInterpolator()
+        }.start()
 
 
-//            val viewAnim = AnimationUtils.loadAnimation(
-//                this, R.anim.view_animation
-//            )
-//
-//            view.startAnimation(viewAnim)
+
+            val viewAnim = AnimationUtils.loadAnimation(
+                this, R.anim.view_animation
+            )
+
+            view.startAnimation(viewAnim)
         }
     }

@@ -1,6 +1,7 @@
 package com.example.netotlogyview
 
 import android.animation.ValueAnimator
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
@@ -84,6 +85,7 @@ class StateView @JvmOverloads constructor(
         )
     }
 
+    @SuppressLint("SuspiciousIndentation")
     override fun onDraw(canvas: Canvas) {
         if (data.isEmpty()) {
             return
